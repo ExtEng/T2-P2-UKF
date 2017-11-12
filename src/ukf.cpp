@@ -291,7 +291,7 @@ void UKF::Prediction(double delta_t) {
   }
   
   cout << "Predict Step: 4" << endl;
-  cout << "Weigths:"<< weigths_ <<endl;
+  cout << "weights_:"<< weights_ <<endl;
   
   //predicted state mean
   x_.fill(0.0);
