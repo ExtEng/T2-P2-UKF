@@ -208,6 +208,9 @@ void UKF::Prediction(double delta_t) {
   P_aug(6,6) = std_yawdd_*std_yawdd_;
 	
   cout << "Predict Step: 1"<< endl;	
+  cout << "x_aug:" << x_aug << endl;
+  cout << "P_aug:" << P_aug << endl;
+  
   //create square root matrix
   MatrixXd L = P_aug.llt().matrixL();
 
@@ -220,6 +223,7 @@ void UKF::Prediction(double delta_t) {
   }
   
   cout << "Predict Step: 2"<< endl;
+  cout << "Xsig_aug:" << Xsig_aug << endl;
   /*******************************************************************************
   * Predict Sigma Points
   * From Lec 7:20
@@ -270,6 +274,7 @@ void UKF::Prediction(double delta_t) {
     Xsig_pred_(4,i) = yawd_p;
   }
   cout << "Predict Step: 3"<< endl;
+  cout << "Xsig_pred_:"<< Xsig_pred_ << endl;
   
   /*******************************************************************************
   * Calculate Mean and Covariance
@@ -280,12 +285,13 @@ void UKF::Prediction(double delta_t) {
   
   weights_(0) = weight_0;
   
-  for (int i=1; i<2*n_aug_+1; i++) {  //2n+1 weights
+  for (int i=1; i<2*n_aug_+1; i++) {  
     double weight = 0.5/(n_aug_+lambda_);
     weights_(i) = weight;
   }
   
-  cout << "Predict Step: 4"<< endl;
+  cout << "Predict Step: 4" << endl;
+  cout << "Weigths:"<< weigths_ <<endl;
   
   //predicted state mean
   x_.fill(0.0);
@@ -294,6 +300,7 @@ void UKF::Prediction(double delta_t) {
   }
   
   cout << "Predict Step: 5"<< endl;
+  cout <<"x_:"<<x_<<endl;
   
   //predicted state covariance matrix
   P_.fill(0.0);
