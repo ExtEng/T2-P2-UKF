@@ -35,7 +35,7 @@ UKF::UKF() {
   */
   
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  std_a_ = 12; 
+  std_a_ = 5; 
 
   // Process noise standard deviation yaw acceleration in rad/s^2
   std_yawdd_ = 1.0; 
@@ -291,12 +291,13 @@ void UKF::Prediction(double delta_t) {
   }
   
   cout << "Predict Step: 4" << endl;
-  cout << "weights_:"<< weights_ <<endl;
+  cout << "weights_:"<< weights_ << endl;
   
   //predicted state mean
   x_.fill(0.0);
-  for (int i = 0; i < 2 * n_aug_ + 1; i++) {  //iterate over sigma points
-    x_ = x_+ weights_(i) * Xsig_pred_.col(i);
+  
+  for (int i = 0; i < 2 * n_aug_ + 1; i++){
+        x_ = x_ + weights_(i) * Xsig_pred_.col(i);
   }
   
   cout << "Predict Step: 5"<< endl;
