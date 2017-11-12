@@ -116,6 +116,10 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 		x_(0) = meas_package.raw_measurements_(0);
 		x_(1) = meas_package.raw_measurements_(1);
 		
+		if (fabs(x_(0)) < EPS and fabs(x_(1)) < EPS){
+		  x_(0) = EPS;
+		  x_(1) = EPS;
+	    }
 		int_init = true;
 		
 	} else if (meas_package.sensor_type_ == MeasurementPackage::RADAR && use_radar_) {
