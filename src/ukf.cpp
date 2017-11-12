@@ -298,13 +298,14 @@ void UKF::Prediction(double delta_t) {
   
   cout << "Predict Step: 4" << endl;
   cout << "weights_:"<< weights_ << endl;
-  
+  cout << "Xsig_pred_.col(0)" << Xsig_pred_.col(0) << endl;
+  cout << "weights_(0)" << weights_(0) << endl;
   //predicted state mean
   x_.fill(0.0);
   
-  //for (int i = 0; i < 2 * n_aug_ + 1; i++){
-  //      x_ = x_ + weights_(i) * Xsig_pred_.col(i);
-  //}
+  for (int i = 0; i < 2 * n_aug_ + 1; i++){
+       x_ = x_ + weights_(i) * Xsig_pred_.col(i);
+  }
   x_ = Xsig_pred_ * weights_;
   
   cout << "Predict Step: 5"<< endl;
