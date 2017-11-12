@@ -78,7 +78,7 @@ UKF::UKF() {
   lambda_ = 3 - n_aug_;
   
   //Create sigma point matrix
-  Xsig_pred_ = MatrixXd(n_aug_, 2 * n_aug_ + 1);
+  Xsig_pred_ = MatrixXd(n_x_, 2 * n_aug_ + 1);
   
   ///Weights of sigma points
   weights_ = VectorXd(2 * n_aug_ + 1);
@@ -306,7 +306,7 @@ void UKF::Prediction(double delta_t) {
   for (int i = 0; i < 2 * n_aug_ + 1; i++){
        x_ = x_ + weights_(i) * Xsig_pred_.col(i);
   }
-  x_ = Xsig_pred_ * weights_;
+ 
   
   cout << "Predict Step: 5"<< endl;
   cout <<"x_:"<<x_<<endl;
