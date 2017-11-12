@@ -2,6 +2,8 @@
 #include "Eigen/Dense"
 #include <iostream>
 
+#define EPS 0.001
+
 using namespace std;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
