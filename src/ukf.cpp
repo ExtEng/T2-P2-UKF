@@ -2,7 +2,6 @@
 #include "Eigen/Dense"
 #include <iostream>
 
-#define EPS 0.001
 
 using namespace std;
 using Eigen::MatrixXd;
@@ -37,10 +36,10 @@ UKF::UKF() {
   */
   
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  std_a_ = 5; 
+  std_a_ = 3; 
 
   // Process noise standard deviation yaw acceleration in rad/s^2
-  std_yawdd_ = 1.0; 
+  std_yawdd_ = 0.5; 
 
   // Laser measurement noise standard deviation position1 in m
   std_laspx_ = 0.15;
@@ -118,10 +117,6 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 		x_(0) = meas_package.raw_measurements_(0);
 		x_(1) = meas_package.raw_measurements_(1);
 		
-		if (fabs(x_(0)) < EPS and fabs(x_(1)) < EPS){
-		  x_(0) = EPS;
-		  x_(1) = EPS;
-	    }
 		int_init = true;
 		
 	} else if (meas_package.sensor_type_ == MeasurementPackage::RADAR && use_radar_) {
