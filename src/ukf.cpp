@@ -303,8 +303,8 @@ void UKF::Prediction(double delta_t) {
   x_.fill(0.0);
   
   //for (int i = 0; i < 2 * n_aug_ + 1; i++){
-        x_ = x_ + weights_(i) * Xsig_pred_.col(i);
-  }
+  //      x_ = x_ + weights_(i) * Xsig_pred_.col(i);
+  //}
   x_ = Xsig_pred_ * weights_;
   
   cout << "Predict Step: 5"<< endl;
