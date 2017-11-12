@@ -249,7 +249,7 @@ void UKF::Prediction(double delta_t) {
         py_p = p_y + v*delta_t*sin(yaw);
     }
 	
-	cout << "Predict Step: 3"<< endl;
+	
     double v_p = v;
     double yaw_p = yaw + yawd*delta_t;
     double yawd_p = yawd;
@@ -269,6 +269,8 @@ void UKF::Prediction(double delta_t) {
     Xsig_pred_(3,i) = yaw_p;
     Xsig_pred_(4,i) = yawd_p;
   }
+  cout << "Predict Step: 3"<< endl;
+  
   /*******************************************************************************
   * Calculate Mean and Covariance
   * From Lec 7:20
@@ -290,7 +292,9 @@ void UKF::Prediction(double delta_t) {
   for (int i = 0; i < 2 * n_aug_ + 1; i++) {  //iterate over sigma points
     x_ = x_+ weights_(i) * Xsig_pred_.col(i);
   }
-
+  
+  cout << "Predict Step: 5"<< endl;
+  
   //predicted state covariance matrix
   P_.fill(0.0);
   for (int i = 0; i < 2 * n_aug_ + 1; i++) {  //iterate over sigma points
