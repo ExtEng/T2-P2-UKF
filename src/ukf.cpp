@@ -206,7 +206,8 @@ void UKF::Prediction(double delta_t) {
   P_aug.topLeftCorner(5,5) = P_;
   P_aug(5,5) = std_a_*std_a_;
   P_aug(6,6) = std_yawdd_*std_yawdd_;
-
+	
+  cout << "Predict Step: 1"<< endl;	
   //create square root matrix
   MatrixXd L = P_aug.llt().matrixL();
 
@@ -218,6 +219,7 @@ void UKF::Prediction(double delta_t) {
     Xsig_aug.col(i+1+n_aug_) = x_aug - sqrt(lambda_+n_aug_) * L.col(i);
   }
   
+  cout << "Predict Step: 2"<< endl;
   /*******************************************************************************
   * Predict Sigma Points
   * From Lec 7:20
@@ -239,14 +241,15 @@ void UKF::Prediction(double delta_t) {
 
     //avoid division by zero
     if (fabs(yawd) > 0.001) {
-        px_p = p_x + v/yawd * ( sin (yaw + yawd*delta_t) - sin(yaw));
+        px_p = p_x + v/yawd * ( sin(yaw + yawd*delta_t) - sin(yaw));
         py_p = p_y + v/yawd * ( cos(yaw) - cos(yaw+yawd*delta_t) );
     }
     else {
         px_p = p_x + v*delta_t*cos(yaw);
         py_p = p_y + v*delta_t*sin(yaw);
     }
-
+	
+	cout << "Predict Step: 3"<< endl;
     double v_p = v;
     double yaw_p = yaw + yawd*delta_t;
     double yawd_p = yawd;
@@ -279,7 +282,9 @@ void UKF::Prediction(double delta_t) {
     double weight = 0.5/(n_aug_+lambda_);
     weights_(i) = weight;
   }
-
+  
+  cout << "Predict Step: 4"<< endl;
+  
   //predicted state mean
   x_.fill(0.0);
   for (int i = 0; i < 2 * n_aug_ + 1; i++) {  //iterate over sigma points
