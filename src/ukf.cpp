@@ -156,7 +156,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   double delta_t = (meas_package.timestamp_ - time_us_) / 1000000.0;
   time_us_ = meas_package.timestamp_;
   
-  cout << "Delta t: "<< delta_t << endl;
+  //cout << "Delta t: "<< delta_t << endl;
   
   Prediction(delta_t);
   
@@ -176,6 +176,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   cout << "NIS[r,l]:" << NIS_r << NIS_l << endl; 
    
 }
+
 
 /**
  * Predicts sigma points, the state, and the state covariance matrix.
