@@ -17,7 +17,7 @@ UKF::UKF() {
   is_initialized_ = false;
   
   // if this is false, laser measurements will be ignored (except during init)
-  use_laser_ = false;
+  use_laser_ = true;
 
   // if this is false, radar measurements will be ignored (except during init)
   use_radar_ = true;
@@ -144,7 +144,6 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	cout << "UKF:Intialized" << endl;
 	cout << "x:" << x_ << endl;
 	cout << "Time:" << time_us_ << endl;
-		
 	}  
 	return;
   }
