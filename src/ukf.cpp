@@ -17,10 +17,10 @@ UKF::UKF() {
   is_initialized_ = false;
   
   // if this is false, laser measurements will be ignored (except during init)
-  use_laser_ = true;
+  use_laser_ = false;
 
   // if this is false, radar measurements will be ignored (except during init)
-  use_radar_ = false;
+  use_radar_ = true;
 
   // initial state vector
   ///* state vector: [pos1 pos2 vel_abs yaw_angle yaw_rate] in SI units and rad
