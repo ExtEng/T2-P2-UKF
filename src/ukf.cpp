@@ -173,7 +173,8 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	UpdateRadar(meas_package);
   }
   
-  cout << "NIS[r,l]" << NIS_r << NIS_l << endl;
+  cout << "NIS[r,l]:" << NIS_l<<end; 
+  cout << NIS_r << end;
    
 }
 
@@ -531,7 +532,5 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
   x_ = x_ + K * z_diff;
   P_ = P_ - K*S*K.transpose();
     
-  NIS_r = z_diff.transpose() * S.inverse() * z_diff;
-  cout << NIS_r <<endl;
-  cout << NIS_l <<endl;  
+  NIS_r = z_diff.transpose() * S.inverse() * z_diff;  
 }
