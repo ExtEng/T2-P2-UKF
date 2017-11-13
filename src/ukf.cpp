@@ -83,8 +83,8 @@ UKF::UKF() {
   weights_ = VectorXd(2 * n_aug_ + 1);
   
   //NIS values for laser and radar
-  double NIS_l = 0.0;
-  double NIS_r = 0.0;   
+  NIS_l = 0.0;
+  NIS_r = 0.0;   
 }
 
 UKF::~UKF() {}
