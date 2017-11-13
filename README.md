@@ -23,13 +23,13 @@ The goals / steps of this project are the following:
 [image7]: ./Output/EKF_Dataset_1-BothSensors.jpg "Position Estimation - Using Sensor Fusion - EKF"
 
 ## Final Results
-After implementing the UKF algorithm, the NIS Values were used to tune and verify the process noise parameters (Std_a_ = 2 ; std_yawdd_ = 0.5). The final results of Dataset 1 yielded a 95% percentile of 7.34178 (Radar) & 5.10503 (Laser), which compared well to the desired values of 7.82 (Radar, n=3) & (Laser, df =2). See below for a illustration of Dataset 1 run and its respective NIS.
+After implementing the UKF algorithm, the NIS Values were used to tune and verify the process noise parameters (Std_a_ = 2 ; std_yawdd_ = 0.5). The final results of Dataset 1 yielded a 95% percentile of 7.34178 (Radar) & 5.10503 (Laser), which compared well to the desired values of 7.82 (Radar, n=3) & 	5.99 (Laser, df =2). See below for a illustration of Dataset 1 run and its respective NIS.
 
 ![alt text][image1]
 
 ![alt text][image3]
 
-The final results of Dataset 2 yielded a 95% percentile of 7.21353 (Radar) & 5.79358 (Laser), which compared well to the desired values of 7.82 (Radar, n=3) & (Laser, df =2).. See below for a illustration of the run and its respective NIS.
+The final results of Dataset 2 yielded a 95% percentile of 7.21353 (Radar) & 5.79358 (Laser), which compared well to the desired values of 7.82 (Radar, n=3) & 5.99 (Laser, df =2).. See below for a illustration of the run and its respective NIS.
 
 ![alt text][image2]
 ![alt text][image4]
