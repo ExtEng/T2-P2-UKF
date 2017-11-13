@@ -20,7 +20,7 @@ UKF::UKF() {
   use_laser_ = true;
 
   // if this is false, radar measurements will be ignored (except during init)
-  use_radar_ = true;
+  use_radar_ = false;
 
   // initial state vector
   ///* state vector: [pos1 pos2 vel_abs yaw_angle yaw_rate] in SI units and rad
@@ -173,7 +173,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	UpdateRadar(meas_package);
   }
   
-  cout << "NIS[r,l]:" << NIS_r << ";"<<NIS_l << ";"<< endl; 
+  cout << "NIS[r,l]:" << NIS_r << ";"<< NIS_l << ";"<< endl; 
    
 }
 
