@@ -173,7 +173,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	UpdateRadar(meas_package);
   }
   
-  cout << "NIS[r,l]:" << NIS_r << NIS_l << endl; 
+  cout << "NIS[r,l]:" << NIS_r << ";"<<NIS_l << ";"<< endl; 
    
 }
 
