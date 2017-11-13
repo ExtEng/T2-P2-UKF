@@ -1,92 +1,48 @@
-# Unscented Kalman Filter Project Starter Code
-Self-Driving Car Engineer Nanodegree Program
+## Term 2 - Project 2 : Unscented Kalman Filter  
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-In this project utilize an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project rubric. 
+In this project, my goal was to use the techniques and code examples presented in the Udacity course to estimate the position of a car using an Unsected Kalman Filter and provided Lidar/radar sensor data.  
 
-This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
+The goals / steps of this project are the following:
+- Complete the UKF Algorithm 
+- Achieve a RSME value <[.09, .09, 0.65, 0.65], [0.20, 0.20, 0.55, 0.55] for datasets 1 & 2 respectively
+- Use NIS for tuning
+- Test Estimation RSME for Dataset 1
+  - Using only Radar data
+  - Using only Laser Data
+- Comparision between EKF & UKF
 
-This repository includes two files that can be used to set up and intall [uWebSocketIO](https://github.com/uWebSockets/uWebSockets) for either Linux or Mac systems. For windows you can use either Docker, VMware, or even [Windows 10 Bash on Ubuntu](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/) to install uWebSocketIO. Please see [this concept in the classroom](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/16cf4a78-4fc7-49e1-8621-3450ca938b77) for the required version and installation scripts.
+[//]: # (Image References)
 
-Once the install for uWebSocketIO is complete, the main program can be built and ran by doing the following from the project top directory.
+[image1]: ./Output/Final_Data_1_Both_trial_2_a_2_yawdd_0.5.jpg "Position Estimation - Using Sensor Fusion - UKF"
+[image2]: ./Output/Final_Data_2_Both_trial_2_a_2_yawdd_0.5.jpg "Position Estimation - Using Sensor Fusion - UKF"
+[image3]: ./Output/NIS_Final_data_1.jpg "Final NIS for Dataset 1"  
+[image4]: ./Output/NIS_Final_data_2.jpg "Final NIS for Dataset 3" 
+[image5]: ./Output/Radar_data_only.jpg "Position Estimation - Radar UKF"
+[image6]: ./Output/Laser_data_only.jpg "Position Estimation - Laser UKF"
+[image7]: ./Output/EKF_Dataset_1-BothSensors.jpg "Position Estimation - Using Sensor Fusion - EKF"
 
-1. mkdir build
-2. cd build
-3. cmake ..
-4. make
-5. ./UnscentedKF
+## Final Results
+After implementing the UKF algorithm, the NIS Values were used to tune and verify the process noise parameters (Std_a_ = 2 ; std_yawdd_ = 0.5). The final results of Dataset 1 yielded a 95% percentile of 7.34178 (Radar) & 5.10503 (Laser), which compared well to the desired values of 7.82 (Radar, n=3) & (Laser, df =2). See below for a illustration of Dataset 1 run and its respective NIS.
 
-Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
+![alt text][image1]
 
-Note that the programs that need to be written to accomplish the project are src/ukf.cpp, src/ukf.h, tools.cpp, and tools.h
+![alt text][image3]
 
-The program main.cpp has already been filled out, but feel free to modify it.
+The final results of Dataset 2 yielded a 95% percentile of 7.21353 (Radar) & 5.79358 (Laser), which compared well to the desired values of 7.82 (Radar, n=3) & (Laser, df =2).. See below for a illustration of the run and its respective NIS.
 
-Here is the main protcol that main.cpp uses for uWebSocketIO in communicating with the simulator.
+![alt text][image2]
+![alt text][image4]
 
+From Dataset 1 - Laser UKF Only, achieved good position tracking accuracy, but not as good as the sensor fusion implementation.
 
-INPUT: values provided by the simulator to the c++ program
-
-["sensor_measurement"] => the measurment that the simulator observed (either lidar or radar)
+![alt text][image6]
 
 
-OUTPUT: values provided by the c++ program to the simulator
+From Dataset 1 - Radar UKF Only, achieved position tracking reasonably well, but not as good as the sensor fusion implementation or the Laser UKF Implementation. Which considering each sensor's Measurement noise, was the expected behavior. 
 
-["estimate_x"] <= kalman filter estimated position x
-["estimate_y"] <= kalman filter estimated position y
-["rmse_x"]
-["rmse_y"]
-["rmse_vx"]
-["rmse_vy"]
+![alt text][image7]
 
----
+From comparing EKF's results to the Final UKF results for Dataset 1, the performace was found to be greater as expected. This would be attributed to error introduced by the linealization approach in the EKF implementation and the use of the CRTV model which models the expected behavior of a car/bicycle better on turns. 
 
-## Other Important Dependencies
-* cmake >= 3.5
-  * All OSes: [click here for installation instructions](https://cmake.org/install/)
-* make >= 4.1 (Linux, Mac), 3.81 (Windows)
-  * Linux: make is installed by default on most Linux distros
-  * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
-  * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
-* gcc/g++ >= 5.4
-  * Linux: gcc / g++ is installed by default on most Linux distros
-  * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
-  * Windows: recommend using [MinGW](http://www.mingw.org/)
-
-## Basic Build Instructions
-
-1. Clone this repo.
-2. Make a build directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
-4. Run it: `./UnscentedKF` Previous versions use i/o from text files.  The current state uses i/o
-from the simulator.
-
-## Editor Settings
-
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
-
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
-
-## Code Style
-
-Please stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html) as much as possible.
-
-## Generating Additional Data
-
-This is optional!
-
-If you'd like to generate your own radar and lidar data, see the
-[utilities repo](https://github.com/udacity/CarND-Mercedes-SF-Utilities) for
-Matlab scripts that can generate additional data.
-
-## Project Instructions and Rubric
-
-This information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/c3eb3583-17b2-4d83-abf7-d852ae1b9fff/concepts/f437b8b0-f2d8-43b0-9662-72ac4e4029c1)
-for instructions and the project rubric.
-
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
-
+![alt text][image7]
