@@ -138,15 +138,15 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	if (int_init){
 	//Initialize time
 	time_us_=meas_package.timestamp_;
-	
-	
+		
 	//Done initializing, no need to predict or update
 	is_initialized_ = true;
 	cout << "UKF:Intialized" << endl;
 	cout << "x:" << x_ << endl;
 	cout << "Time:" << time_us_ << endl;
-	return;	
+		
 	}  
+	return;
   }
   
   /*****************************************************************************
